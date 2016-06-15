@@ -1,1 +1,2 @@
-module.exports = 'zfpx';
+export var name = 'zfpx';
+var age = 8;

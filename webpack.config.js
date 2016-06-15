@@ -5,5 +5,15 @@ module.exports = {
     output:{//配置打包结果
         path:path.resolve(__dirname,'build'),//指定输出文件的目录
         filename:'bundle.js' // 指定输出文件的名称
+    },
+    module:{
+        loaders:[
+            {
+                test:/\.js$/,
+                loader:'babel',
+                exclude:/node_modules/
+            }
+        ]
+
     }
 }

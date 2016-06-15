@@ -29,4 +29,14 @@ $   webpack app/index.js build/bundle.js -p -w -d --progress --display-error-det
 > 把源代码打包成 目标代码
 
 
-##
+##loader
+```
+npm install babel-loader babel-core babel-preset-es2015 babel-preset-stage-0 --save-dev
+```
+```
+babel-loader babel 加载器
+babel-core babel 核心模块
+babel-preset-es2015 把es6代码转成es5代码的预设
+babel-preset-stage-0 把es7代码转成es5代码的预设
+state-0 最新最全最不成熟
+```
