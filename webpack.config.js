@@ -1,4 +1,6 @@
 var path = require('path');
+var jqueryPath = path.resolve(__dirname,'node_modules/jquery/dist/jquery.js');
+
 function rewriteUrl(replacePath){//替换后的路径 /users.json
     return function(req,opt){
         var index = req.url.indexOf('?');//取得？的索引
@@ -8,7 +10,7 @@ function rewriteUrl(replacePath){//替换后的路径 /users.json
         // opt.path=/^\/api\/(.*)/
         // replacePath= users.json
         // => /api/users.json
-        // http://localhost:8080/api/user.json
+        // http://localhost:8080/api/users.json
         req.url =  req.path.replace(opt.path,replacePath)+query;
     }
 }
@@ -32,6 +34,12 @@ module.exports = {
             }
         ]
     },
+    resolve:{
+        extensions:["",".js",".css"],
+        alias:{
+            'jquery':jqueryPath //加快查找速度
+        }
+    },
     module:{ //配置模块
         loaders:[//配置加载器
             {
@@ -40,7 +48,8 @@ module.exports = {
                 exclude:/node_modules/, //排除指定的文件夹，对此文件夹下的文档不解析
                 include:/src/ //只解析指定目录下面的文件
             }
-        ]
+        ],
+        noParse:[jqueryPath] //对于第三方的JS文件，不需要解析
 
     }
 }
