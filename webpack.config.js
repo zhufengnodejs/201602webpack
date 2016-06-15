@@ -1,9 +1,14 @@
 var path = require('path');
-function rewriteUrl(replacePath){//替换后的路径 /user.json
+function rewriteUrl(replacePath){//替换后的路径 /users.json
     return function(req,opt){
         var index = req.url.indexOf('?');//取得？的索引
         var query = index>=0?req.url.substr(index):'';//取得查询字符串
         //用替换后的路径名+查询字符串替换原来的URL路径
+        // req.path=/api/users
+        // opt.path=/^\/api\/(.*)/
+        // replacePath= users.json
+        // => /api/users.json
+        // http://localhost:8080/api/user.json
         req.url =  req.path.replace(opt.path,replacePath)+query;
     }
 }
@@ -18,10 +23,10 @@ module.exports = {
         stats:{colors:true},//显示颜色
         port:8080,//端口号
         contentBase:'build',//静态文件主目录
-        //代理服务器
+        //代理服务器接口 实现URL的重写
         proxy:[
             {  // req.url > pathname
-                path:/^\/api\/(.*)/,
+                path:/^\/api\/(.*)/,//正则会匹配真实的URL路径
                 target:'http://localhost:8080',//目标域名和端口 目标服务
                 rewrite:rewriteUrl('/$1\.json')
             }
