@@ -1,6 +1,6 @@
 var path = require('path');
 var jqueryPath = path.resolve(__dirname,'node_modules/jquery/dist/jquery.js');
-
+var htmlWebpackPlugin = require('html-webpack-plugin');
 function rewriteUrl(replacePath){//替换后的路径 /users.json
     return function(req,opt){
         var index = req.url.indexOf('?');//取得？的索引
@@ -16,12 +16,18 @@ function rewriteUrl(replacePath){//替换后的路径 /users.json
 }
 module.exports = {
     //指定入口文件 使用绝对路径
-    entry:path.resolve(__dirname,'src/index.js'),
+    //entry:path.resolve(__dirname,'src/index.js'),
+    //多入口
+    entry:{
+        main:path.resolve(__dirname,'src/index.js'),
+        page:path.resolve(__dirname,'src/index.js'),
+    },
     output:{//配置打包结果
         path:path.resolve(__dirname,'build'),//指定输出文件的目录
-        filename:'bundle.js' // 指定输出文件的名称
+        filename:'[name].js' // 指定输出文件的名称,[name]指的是 entry的key
     },
     devServer:{
+        inline:true,//当源文件发生变化之后自动编译并自动刷新浏览器
         stats:{colors:true},//显示颜色
         port:8080,//端口号
         contentBase:'build',//静态文件主目录
@@ -67,5 +73,17 @@ module.exports = {
         ],
         noParse:[jqueryPath] //对于第三方的JS文件，不需要解析
 
-    }
+    },
+    plugins:[
+    /**
+     * 此插件用于自动生成html页面
+     * 以template作为模板，然后把生成的js脚本作为script标签引入页面中，默认情况会引入所有的入口文件
+     * 但我们可以通过指定chunks属性来指定要插入的打包后的文件
+     */
+        new htmlWebpackPlugin({
+            title:"珠峰react",
+            template:'./src/index.html',
+            chunks:['main'] //这里放的是entry的key
+        })
+    ]
 }
