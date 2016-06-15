@@ -11,7 +11,7 @@ require('bootstrap/dist/css/bootstrap.css');
 
 var img = document.createElement('img');
 img.className = 'img-circle';
-img.src = require('./img/iphone7.jpg');
+img.src = require('../build/iphone7.jpg');
 document.body.appendChild(img);
 $(document).ready(function(){
     $('#app').html($.zfpxname);
