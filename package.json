@@ -20,6 +20,7 @@
     "html-webpack-plugin": "^2.21.0",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
+    "open-browser-webpack-plugin": "0.0.2",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1",

@@ -1,6 +1,7 @@
 var path = require('path');
 var jqueryPath = path.resolve(__dirname,'node_modules/jquery/dist/jquery.js');
 var htmlWebpackPlugin = require('html-webpack-plugin');
+var openBrowserWebpackPlugin = require('open-browser-webpack-plugin');
 function rewriteUrl(replacePath){//替换后的路径 /users.json
     return function(req,opt){
         var index = req.url.indexOf('?');//取得？的索引
@@ -82,8 +83,9 @@ module.exports = {
      */
         new htmlWebpackPlugin({
             title:"珠峰react",
-            template:'./src/index.html',
-            chunks:['main'] //这里放的是entry的key
-        })
+            template:'./src/index.html'
+            //chunks:['main'] //这里放的是entry的key
+        }),
+        new openBrowserWebpackPlugin({ url: 'http://localhost:8080' })
     ]
 }
