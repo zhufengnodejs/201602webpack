@@ -35,7 +35,7 @@ module.exports = {
         ]
     },
     resolve:{
-        extensions:["",".js",".css"],
+        extensions:["",".js",".css",".less"],
         alias:{
             'jquery':jqueryPath //加快查找速度
         }
@@ -47,6 +47,22 @@ module.exports = {
                 loader:'babel?presets[]=es2015', // 对正则的加载此loader
                 exclude:/node_modules/, //排除指定的文件夹，对此文件夹下的文档不解析
                 include:/src/ //只解析指定目录下面的文件
+            },
+            {
+                test:/\.less$/,
+                loader:'style!css!less'
+            },
+            {
+                test:/\.css$/,
+                loader:'style!css'
+            },
+            {
+                test:/\.(woff|woff2|ttf|svg|eot)/,
+                loader:"url?limit=10000"
+            },
+            {
+                test:/\.(jpg|png|gif|bmp)/,
+                loader:"url?limit=10000"
             }
         ],
         noParse:[jqueryPath] //对于第三方的JS文件，不需要解析
