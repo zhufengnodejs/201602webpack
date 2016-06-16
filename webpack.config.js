@@ -3,7 +3,7 @@ var jqueryPath = path.resolve(__dirname,'node_modules/jquery/dist/jquery.js');
 var htmlWebpackPlugin = require('html-webpack-plugin');
 var openBrowserWebpackPlugin = require('open-browser-webpack-plugin');
 var webpack = require('webpack');
-console.log(process.env.database);
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 //读取环境变量的值，并且设置到window也就是全局对象下面
 var definePlugin = new webpack.DefinePlugin({
     __DEV_DB__:process.env.devdb == 'yes'
@@ -60,11 +60,11 @@ module.exports = {
             },
             {
                 test:/\.less$/,
-                loader:'style!css!less'
+                loader:ExtractTextPlugin.extract('style','css!less')
             },
             {
                 test:/\.css$/,
-                loader:'style!css'
+                loader:ExtractTextPlugin.extract('style','css')
             },
             {
                 test:/\.(woff|woff2|ttf|svg|eot)/,
@@ -94,6 +94,7 @@ module.exports = {
             //chunks:['main'] //这里放的是entry的key
         }),
         new openBrowserWebpackPlugin({ url: 'http://localhost:8080' }),
-        definePlugin
+        definePlugin,
+        new ExtractTextPlugin('bundle.css')
     ]
 }

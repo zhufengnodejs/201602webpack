@@ -58,3 +58,9 @@ state-0 最新最全最不成熟
 
 只安装生产依赖
 npm install --product
+
+
+#提取css文件
+1. 指定抽取的文件
+2. 指定生成打包CSS文件
+3. 把生成的CSS文件插入到html当中去
