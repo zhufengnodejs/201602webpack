@@ -25,10 +25,13 @@ module.exports = {
     //指定入口文件 使用绝对路径
     //entry:path.resolve(__dirname,'src/index.js'),
     //多入口
-    entry:path.resolve(__dirname,'src/index.js'),
+    entry:{
+      index:path.resolve(__dirname,'src/index.js'),
+      vendor:['jquery']
+    },
     output:{//配置打包结果
         path:path.resolve(__dirname,'build'),//指定输出文件的目录
-        filename:'bundle.js' // 指定输出文件的名称,[name]指的是 entry的key
+        filename:'[name].[hash].js' // 指定输出文件的名称,[name]指的是 entry的key
     },
     devServer:{
         inline:true,//当源文件发生变化之后自动编译并自动刷新浏览器
@@ -95,6 +98,26 @@ module.exports = {
         }),
         new openBrowserWebpackPlugin({ url: 'http://localhost:8080' }),
         definePlugin,
-        new ExtractTextPlugin('bundle.css')
+        new ExtractTextPlugin('bundle.css'),
+        new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.[hash].js'),
+        new webpack.optimize.CommonsChunkPlugin('common.[hash].js'),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        }),
+        new webpack.optimize.MinChunkSizePlugin({
+            compress: {
+                warnings: false
+            }
+        }),
+        // 查找相等或近似的模块，避免在最终生成的文件中出现重复的模块
+        new webpack.optimize.DedupePlugin(),
+        // 按引用频度来排序 ID，以便达到减少文件大小的效果
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.AggressiveMergingPlugin({
+            minSizeReduce: 1.5,
+            moveToParents: true
+        })
     ]
 }
