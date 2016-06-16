@@ -3,11 +3,10 @@ var jqueryPath = path.resolve(__dirname,'node_modules/jquery/dist/jquery.js');
 var htmlWebpackPlugin = require('html-webpack-plugin');
 var openBrowserWebpackPlugin = require('open-browser-webpack-plugin');
 var webpack = require('webpack');
-//定义插件 定义一个在winodw下的全局变量
-// key=__DEV__ value就是从环境变量中取值的
+console.log(process.env.database);
+//读取环境变量的值，并且设置到window也就是全局对象下面
 var definePlugin = new webpack.DefinePlugin({
-    __DEV__: (process.env.BUILD_ENV || '').trim() =='dev',
-    __PRODUCT__:(process.env.BUILD_ENV || '').trim() =='product'
+    __DEV_DB__:process.env.devdb == 'yes'
 })
 function rewriteUrl(replacePath){//替换后的路径 /users.json
     return function(req,opt){
@@ -26,13 +25,10 @@ module.exports = {
     //指定入口文件 使用绝对路径
     //entry:path.resolve(__dirname,'src/index.js'),
     //多入口
-    entry:{
-        main:path.resolve(__dirname,'src/index.js'),
-        page:path.resolve(__dirname,'src/index.js'),
-    },
+    entry:path.resolve(__dirname,'src/index.js'),
     output:{//配置打包结果
         path:path.resolve(__dirname,'build'),//指定输出文件的目录
-        filename:'[name].js' // 指定输出文件的名称,[name]指的是 entry的key
+        filename:'bundle.js' // 指定输出文件的名称,[name]指的是 entry的key
     },
     devServer:{
         inline:true,//当源文件发生变化之后自动编译并自动刷新浏览器

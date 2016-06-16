@@ -12,12 +12,6 @@ require('bootstrap/dist/css/bootstrap.css');
 img.className = 'img-circle';
 img.src = require('./img/iphone7.jpg');
 document.body.appendChild(img);*/
-console.log(__DEV__,__PRODUCT__);
-if(__DEV__){
-    document.write('__DEV__');
-}
+//从数据库中读出信息
 
-if(__PRODUCT__){
-    document.write('__PRODUCT__');
-}
-document.write('hello');
+document.write(__DEV_DB__?'本地数据库':'线上数据库');
