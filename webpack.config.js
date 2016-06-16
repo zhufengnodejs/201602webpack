@@ -73,6 +73,10 @@ module.exports = {
             {
                 test:/\.(jpg|png|gif|bmp)/,
                 loader:"url?limit=10000"
+            },
+            {
+                test: /jquery.js$/,
+                loader:"expose?jQuery"
             }
         ],
         noParse:[jqueryPath] //对于第三方的JS文件，不需要解析

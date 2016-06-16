@@ -46,4 +46,15 @@ state-0 最新最全最不成熟
 1. 他们连接数据库可能不一样
 2. 有些调试信息我们希望只在开发环境中打印输出
 输出一些任务的中间状态，
-3. 
+
+- 如何在windows下mac下设置环境变量 
+    `win set key=value mac export key=value`
+- 如果在node中读取环境变量的值
+    `process.env.key`
+- 如果定义全局对象下的全局变量 definePlugin
+    '{key:process.env.key == 'key'}'
+- 如何在js中使用这个全局变量
+    在JS脚本中直接使用key
+
+只安装生产依赖
+npm install --product

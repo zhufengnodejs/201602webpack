@@ -1,6 +1,6 @@
 //var name = require('./component.js');
 import {name} from './component';
-import $ from 'jquery';
+require('jquery');
 require('./css/style');
 require('bootstrap/dist/css/bootstrap.css');
 /**
@@ -13,5 +13,5 @@ img.className = 'img-circle';
 img.src = require('./img/iphone7.jpg');
 document.body.appendChild(img);*/
 //从数据库中读出信息
-
+jQuery('#app').html('我是jquery');
 document.write(__DEV_DB__?'本地数据库':'线上数据库');
