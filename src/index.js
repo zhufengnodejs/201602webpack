@@ -12,4 +12,12 @@ require('bootstrap/dist/css/bootstrap.css');
 img.className = 'img-circle';
 img.src = require('./img/iphone7.jpg');
 document.body.appendChild(img);*/
+console.log(__DEV__,__PRODUCT__);
+if(__DEV__){
+    document.write('__DEV__');
+}
+
+if(__PRODUCT__){
+    document.write('__PRODUCT__');
+}
 document.write('hello');

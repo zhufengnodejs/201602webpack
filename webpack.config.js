@@ -2,6 +2,13 @@ var path = require('path');
 var jqueryPath = path.resolve(__dirname,'node_modules/jquery/dist/jquery.js');
 var htmlWebpackPlugin = require('html-webpack-plugin');
 var openBrowserWebpackPlugin = require('open-browser-webpack-plugin');
+var webpack = require('webpack');
+//定义插件 定义一个在winodw下的全局变量
+// key=__DEV__ value就是从环境变量中取值的
+var definePlugin = new webpack.DefinePlugin({
+    __DEV__: (process.env.BUILD_ENV || '').trim() =='dev',
+    __PRODUCT__:(process.env.BUILD_ENV || '').trim() =='product'
+})
 function rewriteUrl(replacePath){//替换后的路径 /users.json
     return function(req,opt){
         var index = req.url.indexOf('?');//取得？的索引
@@ -86,6 +93,7 @@ module.exports = {
             template:'./src/index.html'
             //chunks:['main'] //这里放的是entry的key
         }),
-        new openBrowserWebpackPlugin({ url: 'http://localhost:8080' })
+        new openBrowserWebpackPlugin({ url: 'http://localhost:8080' }),
+        definePlugin
     ]
 }
