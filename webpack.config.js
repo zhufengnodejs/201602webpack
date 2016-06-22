@@ -48,7 +48,7 @@ module.exports = {
         ]
     },
     resolve:{
-        extensions:["",".js",".css",".less"],
+        extensions:["",".js",".css",".less"],//指定扩展名
         alias:{
             'jquery':jqueryPath //加快查找速度
         }
@@ -79,7 +79,7 @@ module.exports = {
             },
             {
                 test: /jquery.js$/,
-                loader:"expose?jQuery"
+                loader:"expose?jQuery"//把jquery模板暴露在window的属性上 作为全局变量
             }
         ],
         noParse:[jqueryPath] //对于第三方的JS文件，不需要解析
@@ -97,8 +97,8 @@ module.exports = {
             //chunks:['main'] //这里放的是entry的key
         }),
         new openBrowserWebpackPlugin({ url: 'http://localhost:8080' }),
-        definePlugin,
-        new ExtractTextPlugin('bundle.css'),
+        definePlugin,//定义全局变量在js中使用
+        new ExtractTextPlugin('bundle.css'),//把css文件抽取成一个文件
         new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.[hash].js'),
         new webpack.optimize.CommonsChunkPlugin('common.[hash].js'),
         new webpack.optimize.UglifyJsPlugin({
