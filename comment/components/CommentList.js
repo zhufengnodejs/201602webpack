@@ -8,7 +8,7 @@ export default class CommentList extends React.Component{
                     <ul className="list-group">
                         {
                             this.props.data.map((item,index)=>{
-                                return <li className="list-group-item">
+                                return <li key={index} className="list-group-item">
                                         {item.author}:{item.date}:{item.msg}
                                 </li>
                             })
