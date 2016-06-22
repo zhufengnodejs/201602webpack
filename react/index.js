@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Input from './components/Input.js'
-import Show from './components/Show.js'
+import {Input,Show} from './components';
 
 //创建一个继承至Component的子类
 class App extends React.Component{
