@@ -5,7 +5,10 @@ export default class Input extends React.Component{
 
     render(){
         return (
-            <div><input type="text" onChange={this.props.inputChange}/></div>
+            <div>
+                <input type="text" ref="myinput"
+ onChange={()=>{this.props.inputChange(this.refs.myinput.value)}}/>
+            </div>
         )
     }
 }
