@@ -9,7 +9,9 @@
     "publish-mac": "export devdb=yes&&  webpack-dev-server",
     "publish-win": "set devdb=yes&&  webpack-dev-server",
     "build-react": "webpack --config webpack.config.react.js",
-    "start-react": "webpack-dev-server --config webpack.config.react.js"
+    "start-react": "webpack-dev-server --config webpack.config.react.js",
+    "build-comment": "webpack --config webpack.config.comment.js",
+    "start-comment": "webpack-dev-server --config webpack.config.comment.js"
   },
   "keywords": [],
   "author": "",
