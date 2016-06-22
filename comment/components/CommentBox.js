@@ -6,11 +6,11 @@ export default class CommentBox extends React.Component{
     render(){
         return (
                 <div className="panel panel-success">
-                    <div className="panel-heading">
-                        <h2>欢迎留言</h2>
+                    <div className="panel-heading text-center">
+                        <h3>欢迎留言</h3>
                     </div>
                     <div className="panel-body">
-                        <CommentList/>
+                        <CommentList data={this.props.data}/>
                     </div>
                     <div className="panel-footer">
                         <CommentForm/>

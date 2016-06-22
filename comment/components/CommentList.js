@@ -6,12 +6,13 @@ export default class CommentList extends React.Component{
             <div className="row">
                 <div className="col-xs-12">
                     <ul className="list-group">
-                        <li className="list-group-item">
-                            张三:10分钟前:今天天气真好啊
-                        </li>
-                        <li className="list-group-item">
-                            李四:5分钟前:是啊，这冰雹比鹅蛋还大
-                        </li>
+                        {
+                            this.props.data.map((item,index)=>{
+                                return <li className="list-group-item">
+                                        {item.author}:{item.date}:{item.msg}
+                                </li>
+                            })
+                        }
                     </ul>
                 </div>
             </div>
