@@ -18,9 +18,18 @@ export default class CommentBox extends React.Component{
     constructor(props){
         super(props);
         this.state = {data:[]};//此写法只能在constructor里用
+        this.getComment();
+        //setInterval(this.getComment.bind(this),3000);
+    }
+    addMsg(message){
+        this.setState({data:this.state.data.concat(message)});//只能用setState
     }
     //当此组件将要被加载到界面上时使用
     componentWillMount(){
+
+    }
+
+    getComment(){
         $.get(this.props.url).then((data)=>{
             this.setState({data:data});//只能用setState
         });
@@ -36,7 +45,7 @@ export default class CommentBox extends React.Component{
                         <CommentList data={this.state.data}/>
                     </div>
                     <div className="panel-footer">
-                        <CommentForm/>
+                        <CommentForm addMsg={this.addMsg.bind(this)}/>
                     </div>
                 </div>
         )
