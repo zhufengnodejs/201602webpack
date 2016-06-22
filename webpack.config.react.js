@@ -1,4 +1,5 @@
 var path = require('path');
+var openBrowserWebpackPlugin = require('open-browser-webpack-plugin');
 module.exports = {
     entry:path.resolve(__dirname,'react/index.js'),
     output:{
@@ -19,5 +20,8 @@ module.exports = {
                 include:path.resolve(__dirname,'react')
             }
         ]
-    }
+    },
+    plugins:[
+        new openBrowserWebpackPlugin({ url: 'http://localhost:8080' })
+    ]
 }
