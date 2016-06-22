@@ -23,7 +23,7 @@ module.exports = {
             },
             {
                 test:/\.css$/,
-                loader:'style!css?modules&localIdentName=[name]__[local]___[hash:base64:10]'
+                loader:'style!css'
             },
             {
                 test:/\.(eot|svg|ttf|woff|woff2)/,
