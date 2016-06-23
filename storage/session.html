@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    /*sessionStorage.name = 'zfpx';
+    document.write(sessionStorage.name);
+
+    sessionStorage.setItem('name','zfpx2')
+    document.write(sessionStorage.getItem('name'));*/
+
+    if(sessionStorage.count){
+        sessionStorage.count = Number(sessionStorage.count)+1;
+    }else{
+        sessionStorage.count = '1';
+    }
+    document.write('你已经访问了'+sessionStorage.count+'次');
+</script>
+</html>
