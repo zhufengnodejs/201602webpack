@@ -25,6 +25,16 @@ export default class CommentBox extends React.Component{
         this.setState({data:helper.list()});
     }
 
+    boxDel(id){
+        helper.del(id);
+        this.setState({data:helper.list()});
+    }
+
+    deleteAll(){
+        helper.deleteAll();
+        this.setState({data:helper.list()});
+    }
+
     render(){
         return (
                 <div className="panel panel-success">
@@ -32,10 +42,12 @@ export default class CommentBox extends React.Component{
                         <h3>欢迎留言</h3>
                     </div>
                     <div className="panel-body">
-                        <CommentList data={this.state.data}/>
+                        <CommentList boxDel={this.boxDel.bind(this)} data={this.state.data}/>
+                        <button onClick={this.deleteAll.bind(this)} className="btn btn-danger">全部删除</button>
                     </div>
                     <div className="panel-footer">
                         <CommentForm addMsg={this.addMsg.bind(this)}/>
+
                     </div>
                 </div>
         )
